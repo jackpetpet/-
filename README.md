@@ -1,9 +1,6 @@
-<!-- 懒羊羊封面图：居中、圆角、有阴影，非常可爱 -->
- <p align="center">
-   < img src="https://raw.githubusercontent.com/jackpetpet/-/main/note/ml/微信图片_20260205173741_257_4.jpg" alt="懒羊羊：是谁想出来这种题为难我们" style="width: 100%; max-width: 600px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+<p align="center">
+   < img src="https://raw.githubusercontent.com/jackpetpet/-/main/note/ml/微信图片_20260205173741_257.4.jpg" alt="懒羊羊学习中" style="width: 100%; max-width: 600px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
  </p >
- <!-- 整个页面的淡白色背景，让文字更清晰 -->
- <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #f5f5f5; opacity: 0.9; z-index: -1;"></div>
 
 
 
