@@ -1,4 +1,4 @@
-<img src="https://cdn.jsdelivr.net/gh/jackpetpet/-/note/ml/lazy-sheep.jpg" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.25; z-index: -1; margin: 0; padding: 0; border: none;">
+<img src="https://cdn.jsdelivr.net/gh/jackpetpet/-/note/ml/lazy-sheep.jpg?v=1" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.25; z-index: -1;">
 
 这里是jackpetpet，欢迎来到我的博客～，🌸 Welcome to My Little Study Blog 🌸
 
