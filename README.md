@@ -1,6 +1,6 @@
-<div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: url('https://cdn.jsdelivr.net/gh/jackpetpet/-/main/note/ml/lazy-sheep.jpg'); background-size: cover; background-attachment: fixed; opacity: 0.2; z-index: -1;"></div>
- 这里是jackpetpet，欢迎来到我的博客～，🌸 Welcome to My Little Study Blog 🌸
- 关键词：还没想到
+<img src="https://cdn.jsdelivr.net/gh/jackpetpet/-/note/ml/lazy-sheep.jpg" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.18; z-index: -1; margin: 0; padding: 0; border: none;">
+
+这里是jackpetpet，欢迎来到我的博客～，🌸 Welcome to My Little Study Blog 🌸
 
 
 
