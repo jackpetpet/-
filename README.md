@@ -8,7 +8,7 @@
 ## 📚 学习笔记分类
 
 ### 1. 深度学习与机器学习 👈【第一篇笔记：逻辑斯特回归】
-- [2026-02-05 逻辑斯特回归（Logistic Regression）原理与实现](notes/ml/2026-02-05-logistic-regression.md)
+- [2026-02-05 逻辑斯特回归（Logistic Regression）原理与实现](note/ml/2026-02-05-logistic-regression.md)
   
 
 ### 2. Python & 数据分析
