@@ -1,7 +1,5 @@
-<p align="center">
-  <img src="https://cdn.jsdelivr.net/gh/jackpetpet/-/note/ml/lazy-sheep.jpg?v=2" width="800" alt="懒羊羊学习背景">
-</p >
-
+<!-- 懒羊羊全屏背景：左对齐，铺满，不居中，不影响文字 -->
+ <div style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: url('https://cdn.jsdelivr.net/gh/jackpetpet/-/note/ml/lazy-sheep.jpg?v=3') no-repeat center center / cover; opacity: 0.25; z-index: -9999 !important;"></div>
 这里是jackpetpet，欢迎来到我的博客～，🌸 Welcome to My Little Study Blog 🌸
 
 
