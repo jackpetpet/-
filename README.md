@@ -3,7 +3,6 @@
 这里是jackpetpet，欢迎来到我的博客～，🌸 Welcome to My Little Study Blog 🌸
 
 
-
 # 学习日记
 **身份**：大二 
 **方向**：Python 编程、数据分析（NumPy/Pandas）、深度学习、机器学习基础
