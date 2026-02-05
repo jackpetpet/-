@@ -1,5 +1,5 @@
 <p align="center">
-   <img src="https://raw.githubusercontent.com/jackpetpet/-/main/note/ml/微信图片_20260205173741_257.4.jpg" alt="懒羊羊学习中" style="width: 100%; max-width: 600px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+   <img src="https://raw.githubusercontent.com/jackpetpet/-/main/note/ml/lazy-sleep.jpg" alt="懒羊羊学习中" style="width: 100%; max-width: 600px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
  </p >
 
 
