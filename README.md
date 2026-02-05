@@ -1,14 +1,21 @@
-<p align="center">
-   <img src="https://raw.githubusercontent.com/jackpetpet/-/main/note/ml/lazy-sleep.jpg" alt="懒羊羊学习中" style="width: 100%; max-width: 600px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
- </p >
+<!-- 懒羊羊全屏背景：铺满整个页面，置于文字底层，低透明度不挡字 -->
+ <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+ background-image: url('https://raw.githubusercontent.com/jackpetpet/-/main/note/ml/lazy-sheep.jpg'); 
+ background-size: cover; 
+ background-repeat: no-repeat; 
+ background-attachment: fixed; 
+ opacity: 0.18; 
+ z-index: -1;"></div>
 
 
 
 
 # 学习日记
-**身份**：大二 | 【数科】
+# 这里是jackpetpet，欢迎来到我的博客~，🌸 Welcome to My Little Study Blog 🌸
+# 关键词：还没想到
+**身份**：大二 
 **方向**：Python 编程、数据分析（NumPy/Pandas）、深度学习、机器学习基础
-**目标**：记录学习踩坑、跑代码的情况、知识点整理，每个项目的整理
+**目标**：学习整理
 
 ---
 
@@ -26,6 +33,5 @@
 
 ---
 
-## 📝 关于我
-记录大二数科学习生活，专注人工智能与数据分析方向的知识复盘，欢迎交流～
+
 GitHub 仓库：https://github.com/jackpetpet/-
