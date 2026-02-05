@@ -1,11 +1,11 @@
 <!-- 懒羊羊全屏背景：铺满整个页面，置于文字底层，低透明度不挡字 -->
- <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
- background-image: url('https://raw.githubusercontent.com/jackpetpet/-/main/note/ml/lazy-sheep.jpg'); 
- background-size: cover; 
- background-repeat: no-repeat; 
- background-attachment: fixed; 
- opacity: 0.18; 
- z-index: -1;"></div>
+<div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+background-image: url('https://raw.githubusercontent.com/jackpetpet/-/main/note/ml/lazy-sheep.jpg'); 
+background-size: cover; 
+background-repeat: no-repeat; 
+background-attachment: fixed; 
+opacity: 0.18; 
+z-index: -1;"></div>
 
 
 
