@@ -375,6 +375,7 @@ U(s,a)=c_{\text{puct}}
 P(s,a)
 \frac{\sqrt{\sum_b N(s,b)}}{1+N(s,a)}
 $$
+
 ---
 ### 💻 对应代码
 
@@ -388,13 +389,10 @@ self._u = (c_puct * self._P *
 
 # 6. Q + U：MCTS 到底怎么选择动作？
 $$
-a^*
-=
-\arg\max_a
-\left[
-Q(s,a)+U(s,a)
-\right]
+a^*=\arg\max_a\left[Q(s,a)+U(s,a)\right]
 $$
+
+---
 ## 6.1 Q 和 U 分别代表什么？
 
 ```text
@@ -734,6 +732,7 @@ run函数的步骤是先进行自对弈的过程，收集数据到经验池，�
 
 ```
 流程如下：
+```text
                   ┌─────────────────────┐
                   │  当前 PolicyValueNet │
                   └──────────┬──────────┘
@@ -781,6 +780,7 @@ run函数的步骤是先进行自对弈的过程，收集数据到经验池，�
                            是
                             ↓
                   增加 Pure MCTS 搜索次数
+```
 ---
 
 # 12. 把整个 AlphaZero 串起来
