@@ -80,11 +80,7 @@ $$
 SAC加入熵奖励：
 
 $$
-J(\pi)
-=
-E\left[
-\sum(r_t+\alpha H(\pi))
-\right]
+J(\pi)=E\left[\sum(r_t+\alpha H(\pi))\right]
 $$
 
 其中：
@@ -121,9 +117,7 @@ $$
 熵：
 
 $$
-H(\pi)
-=
--E[\log\pi(a|s)]
+H(\pi)=-E[\log\pi(a|s)]
 $$
 
 这个公式的解释，计算log策略的期望的负值，不直接用策略的原因是策略这个概率函数的总和为1，所以期望相当于是平均数，没什么区分度，加上log就不一样了，在[0,1]区间里边log都是负值，而且概率越分散，这个负值就越低，
@@ -175,9 +169,7 @@ action B : 50%
 > 主包在这里有个疑问，-log0不是应该更接近正无穷所以更大，其实完整的公式
 
 $$
-H(\pi)
-=
--E[\log\pi(a|s)]
+H(\pi)=-E[\log\pi(a|s)]
 $$
 
 我们不能忽略是连续分布，所以先看离散分布的话0log0=0，根据洛必达法则，虽然是连续但是是同样的意思，所以如果是那种情况，那起主导作用
@@ -320,11 +312,7 @@ $$
 Soft Update：
 
 $$
-\theta_{target}
-=
-\tau\theta
-+
-(1-\tau)\theta_{target}
+\theta_{target}=\tau\theta+(1-\tau)\theta_{target}
 $$
 
 ---
@@ -360,18 +348,13 @@ q_loss, Q_curr = self._compute_qloss(batch)
 目标：
 
 $$
-Q^*
-=
-r+\gamma V(s')
+Q^*=r+\gamma V(s')
 $$
 
 其中：
 
 $$
-V(s')
-=
-Q(s',a')
--\alpha\log\pi(a'|s')
+V(s')=Q(s',a')-\alpha\log\pi(a'|s')
 $$
 
 ---
@@ -383,17 +366,13 @@ $$
 熵：
 
 $$
-H(\pi)
-=
--E[\log\pi(a|s)]
+H(\pi)=-E[\log\pi(a|s)]
 $$
 
 所以：
 
 $$
-\alpha H
-=
--\alpha\log\pi(a|s)
+\alpha H=-\alpha\log\pi(a|s)
 $$
 
 因此：
@@ -460,11 +439,7 @@ a_loss = (
 公式：
 
 $$
-J(\pi)
-=
-E[
-\alpha\log\pi(a|s)-Q(s,a)
-]
+J(\pi)=E[\alpha\log\pi(a|s)-Q(s,a)]
 $$
 
 由于优化采用梯度下降：
@@ -558,15 +533,7 @@ self.alpha
 ```
 
 $$
-J(\alpha)
-=
-E_{a\sim\pi_t}
-\left[
--\alpha
-\left(
-\log\pi_t(a|\pi_t)+H_0
-\right)
-\right]
+J(\alpha)=E_{a\sim\pi_t}\left[-\alpha\left(\log\pi_t(a|\pi_t)+H_0\right)\right]
 $$
 
 ---
@@ -628,9 +595,7 @@ $$
 因为：
 
 $$
-H(\pi)
-=
--E[\log\pi]
+H(\pi)=-E[\log\pi]
 $$
 
 希望：
