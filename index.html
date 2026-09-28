@@ -2,185 +2,351 @@
 <html lang="zh-CN">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Lazy Sleep</title>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>学习笔记</title>
 
     <style>
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        html,
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                "Microsoft YaHei",
+                sans-serif;
+
+            background: #f5f5f5;
+            color: #222;
+        }
+
+        /* =========================
+           顶部图片
+           ========================= */
+
+        .hero {
+
             width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
+            height: 55vh;
 
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #000;
-        }
-
-        .cover {
-            width: 100vw;
-            height: 100vh;
+            min-height: 420px;
 
             background-image:
                 linear-gradient(
-                    rgba(0, 0, 0, 0.25),
-                    rgba(0, 0, 0, 0.45)
+                    rgba(0, 0, 0, 0.15),
+                    rgba(0, 0, 0, 0.35)
                 ),
                 url("./note/ml/lazy-sleep.jpg");
 
             background-size: cover;
+
             background-position: center;
+
             background-repeat: no-repeat;
 
             display: flex;
-            justify-content: center;
-            align-items: center;
 
-            position: relative;
+            align-items: flex-end;
+
+            padding: 60px 8%;
         }
 
-        .content {
-            text-align: center;
+        .hero-title {
+
             color: white;
 
-            animation: fadeIn 2s ease;
-        }
+            font-size: 48px;
 
-        .title {
-            font-size: 64px;
             font-weight: 600;
-            letter-spacing: 8px;
 
-            margin-bottom: 20px;
-
-            text-shadow:
-                0 4px 20px rgba(0, 0, 0, 0.7);
-        }
-
-        .subtitle {
-            font-size: 16px;
-            letter-spacing: 5px;
-
-            margin-bottom: 50px;
-
-            opacity: 0.85;
-        }
-
-        .enter {
-            display: inline-block;
-
-            padding: 15px 45px;
-
-            color: white;
-            text-decoration: none;
-
-            border: 1px solid rgba(255, 255, 255, 0.8);
-
-            font-size: 14px;
             letter-spacing: 4px;
 
-            transition: all 0.4s ease;
-
-            background: rgba(0, 0, 0, 0.15);
-
-            backdrop-filter: blur(5px);
+            text-shadow:
+                0 3px 20px rgba(0, 0, 0, 0.6);
         }
 
-        .enter:hover {
-            background: white;
-            color: black;
 
-            transform: scale(1.05);
+        /* =========================
+           主体
+           ========================= */
+
+        .container {
+
+            width: min(1000px, 90%);
+
+            margin: 60px auto 100px;
+        }
+
+
+        .section-title {
+
+            font-size: 28px;
+
+            font-weight: 600;
+
+            margin-bottom: 30px;
+        }
+
+
+        /* =========================
+           笔记卡片
+           ========================= */
+
+        .notes {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(280px, 1fr)
+                );
+
+            gap: 25px;
+        }
+
+
+        .note-card {
+
+            display: block;
+
+            padding: 30px;
+
+            background: white;
+
+            border-radius: 16px;
+
+            text-decoration: none;
+
+            color: #222;
 
             box-shadow:
-                0 0 30px rgba(255, 255, 255, 0.4);
+                0 5px 25px
+                rgba(0, 0, 0, 0.06);
+
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease;
         }
 
-        .footer {
-            position: absolute;
 
-            bottom: 30px;
-            left: 0;
-            right: 0;
+        .note-card:hover {
+
+            transform:
+                translateY(-6px);
+
+            box-shadow:
+                0 12px 35px
+                rgba(0, 0, 0, 0.12);
+        }
+
+
+        .note-type {
+
+            font-size: 13px;
+
+            color: #888;
+
+            margin-bottom: 12px;
+        }
+
+
+        .note-name {
+
+            font-size: 23px;
+
+            font-weight: 600;
+
+            margin-bottom: 12px;
+        }
+
+
+        .note-description {
+
+            font-size: 14px;
+
+            line-height: 1.8;
+
+            color: #777;
+        }
+
+
+        /* =========================
+           底部
+           ========================= */
+
+        .footer {
 
             text-align: center;
 
-            color: rgba(255, 255, 255, 0.65);
+            padding: 40px 0;
 
-            font-size: 12px;
+            color: #aaa;
 
-            letter-spacing: 2px;
+            font-size: 13px;
         }
 
-        @keyframes fadeIn {
 
-            from {
-                opacity: 0;
-                transform: translateY(20px);
+        /* =========================
+           手机端
+           ========================= */
+
+        @media (max-width: 700px) {
+
+            .hero {
+
+                height: 45vh;
+
+                min-height: 320px;
+
+                padding: 35px 7%;
             }
 
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            .hero-title {
+
+                font-size: 34px;
+
+                letter-spacing: 2px;
+            }
+
+            .container {
+
+                margin-top: 40px;
             }
 
         }
 
-        @media (max-width: 768px) {
-
-            .title {
-                font-size: 38px;
-                letter-spacing: 5px;
-            }
-
-            .subtitle {
-                font-size: 12px;
-                letter-spacing: 3px;
-            }
-
-            .enter {
-                padding: 13px 32px;
-            }
-
-        }
     </style>
 
 </head>
 
+
 <body>
 
-    <div class="cover">
 
-        <div class="content">
+    <!-- 顶部图片 -->
 
-            <div class="title">
-                LAZY SLEEP
-            </div>
+    <section class="hero">
 
-            <div class="subtitle">
-                MY LEARNING BLOG
-            </div>
+        <div class="hero-title">
 
-            <a class="enter" href="./home.html">
-                ENTER
+            学习笔记
+
+        </div>
+
+    </section>
+
+
+    <!-- 主体 -->
+
+    <main class="container">
+
+
+        <div class="section-title">
+
+            强化学习
+
+        </div>
+
+
+        <div class="notes">
+
+
+            <!-- SAC -->
+
+            <a
+                class="note-card"
+                href="https://github.com/jackpetpet/-/blob/main/note/ml/SAC.md"
+                target="_blank"
+            >
+
+                <div class="note-type">
+                    强化学习
+                </div>
+
+                <div class="note-name">
+                    SAC 学习笔记
+                </div>
+
+                <div class="note-description">
+                    Soft Actor-Critic，从最大熵强化学习到 Actor、Critic 与 Alpha 自动调节。
+                </div>
+
             </a>
 
+
+            <!-- TD3 -->
+
+            <a
+                class="note-card"
+                href="https://github.com/jackpetpet/-/blob/main/note/ml/TD3学习笔记.md"
+                target="_blank"
+            >
+
+                <div class="note-type">
+                    强化学习
+                </div>
+
+                <div class="note-name">
+                    TD3 学习笔记
+                </div>
+
+                <div class="note-description">
+                    从 DDPG 到 TD3，理解 Double Critic、Target Policy Smoothing 与延迟更新。
+                </div>
+
+            </a>
+
+
+            <!-- AlphaZero -->
+
+            <a
+                class="note-card"
+                href="https://github.com/jackpetpet/-/blob/main/note/ml/alphazero-note.md"
+                target="_blank"
+            >
+
+                <div class="note-type">
+                    强化学习
+                </div>
+
+                <div class="note-name">
+                    AlphaZero 学习笔记
+                </div>
+
+                <div class="note-description">
+                    从蒙特卡洛树搜索到策略网络与价值网络，梳理 AlphaZero 的整体流程。
+                </div>
+
+            </a>
+
+
         </div>
 
-        <div class="footer">
-            KEEP LEARNING · KEEP THINKING
-        </div>
 
-    </div>
+    </main>
+
+
+    <footer class="footer">
+
+        学习 · 思考 · 记录
+
+    </footer>
+
 
 </body>
 
