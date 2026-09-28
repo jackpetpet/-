@@ -2,7 +2,7 @@
 
 # 站点基本信息
 title: "燃烧的番茄的个人博客"        # 网站标题（浏览器标签、首页大标题）
-description: "记录学习、生活与技术探索的小天地"  # 站点描述（SEO 用）
+description: "记录学习、生活与技术探索"  # 站点描述（SEO 用）
 url: "https://jackpetpet.github.io"  # 你的 GitHub Pages 地址（必须正确，否则图片/链接会404）
 baseurl: ""                          # 如果部署在子路径（如 https://xxx.github.io/blog），填 "/blog"，否则留空
 
