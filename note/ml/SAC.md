@@ -100,8 +100,9 @@ $$
 1. 动作价值尽可能高
 
 2. 策略保持一定随机性
+   策略保持随机性在后面有解释
 
-## 策略保持随机性在后面有解释
+---
 
 # 3. 什么是Entropy（熵）
 
@@ -120,11 +121,12 @@ $$
 熵：
 
 $$
-H(\pi)=-E[\log\pi(a|s)]
+H(\pi)
+=
+-E[\log\pi(a|s)]
 $$
 
 这个公式的解释，计算log策略的期望的负值，不直接用策略的原因是策略这个概率函数的总和为1，所以期望相当于是平均数，没什么区分度，加上log就不一样了，在[0,1]区间里边log都是负值，而且概率越分散，这个负值就越低，
-
 越是在某个动作的概率越高，选哪个动作程度越明显，就越接近0，再加上负号就直接转化成熵值高低来形容了
 
 ---
@@ -140,12 +142,9 @@ action B : 1%
 ```
 
 说明：
-
 策略认为A几乎一定正确。
-
 熵较低。
-
----
+----
 
 ## 3.2 高熵情况
 
@@ -158,9 +157,7 @@ action B : 50%
 ```
 
 说明：
-
 策略仍然保留探索。
-
 熵较高。
 
 ---
@@ -175,8 +172,7 @@ action B : 50%
 在强化学习中：
 
 > 高熵代表策略具有更多可能性，因此具有更强探索能力，高熵代码概率分布越分散，不再是某个动作的极高，某个动作几乎为0，所以熵就低
-
-主包在这里有个疑问，-log0不是应该更接近正无穷所以更大，其实完整的公式
+> 主包在这里有个疑问，-log0不是应该更接近正无穷所以更大，其实完整的公式
 
 $$
 H(\pi)
@@ -184,7 +180,8 @@ H(\pi)
 -E[\log\pi(a|s)]
 $$
 
-我们不能忽略是连续分布，所以先看离散分布的话0log0=0，根据洛必达法则，虽然是连续但是是同样的意思，所以如果是那种情况，那起主导作用的可能是动作极高的那个概率值
+我们不能忽略是连续分布，所以先看离散分布的话0log0=0，根据洛必达法则，虽然是连续但是是同样的意思，所以如果是那种情况，那起主导作用
+的可能是动作极高的那个概率值
 
 ---
 
@@ -241,10 +238,10 @@ $$
                               v
 
                     Soft Target Update
+
 ```
 
 相比于TD3我觉得在Q值计算层面多了个熵值--Q+αH，还有多了个alpha的参数更新，alpha是熵值的超参数，类似温度调节剂，熵值低就调大，熵值高就调小
-
 还有就是SAC是连续策略函数，服从正态分布
 
 ---
@@ -282,7 +279,6 @@ a\sim\pi(a|s)
 $$
 
 SAC不是直接输出确定动作，而是从策略分布中采样。
-
 本代码SAC是用于连续的动作，所以以后不再是某个确定动作，神经网络去拟合的是u,西格玛，也就是正态分布的两个必须值
 
 ---
@@ -418,9 +414,7 @@ $$
 Q_next - alpha*log_pi
 ```
 
-不是减少探索，而是在加入熵奖励。
-
----
+## 不是减少探索，而是在加入熵奖励。
 
 # 8. Actor更新
 
@@ -503,9 +497,7 @@ $$
 
 # 9. Alpha自动调节
 
-这是SAC区别于TD3的重要部分。
-
----
+## 这是SAC区别于TD3的重要部分。
 
 # 9.1 为什么需要Alpha？
 
@@ -527,19 +519,13 @@ $$
 Q
 $$
 
-等价于TD3。
-
----
+## 等价于TD3。
 
 如果：
-
 alpha过大
-
 策略会过于随机。
-
 因此需要自动调整Alpha。
-
----
+--------------
 
 # 9.2 Alpha是什么？
 
@@ -552,36 +538,23 @@ self.alpha
 ```
 
 是真正参与Actor更新的参数。
-
 作用：
-
 控制熵的重要程度。
-
----
+---------
 
 ## alpha_loss
 
 代码：
 
 ```python
-if self.adaptive_alpha:
-    alpha_loss = -(
-        self.log_alpha *
-        (log_pi.detach() + self.target_entropy)
-    ).mean()        # 收敛较快, 计算较快
-
-    # alpha_loss = -(
-    #     self.log_alpha.exp() *
-    #     (log_pi.detach() + self.target_entropy)
-    # ).mean()      # 收敛用的episode较大, 且计算速度慢
-
-    self._optim_step(self.alpha_optimizer, alpha_loss)
-
-    self.alpha = self.log_alpha.exp().item()
-
-    alpha_loss = alpha_loss.item() # logging
-else:
-    alpha_loss = None
+        if self.adaptive_alpha:
+            alpha_loss = -(self.log_alpha * (log_pi.detach() + self.target_entropy)).mean()        # 收敛较快, 计算较快
+            #alpha_loss = -(self.log_alpha.exp() * (log_pi.detach() + self.target_entropy)).mean() # 收敛用的episode较大, 且计算速度慢
+            self._optim_step(self.alpha_optimizer, alpha_loss)
+            self.alpha = self.log_alpha.exp().item()
+            alpha_loss = alpha_loss.item() # logging
+        else:
+            alpha_loss = None
 ```
 
 $$
@@ -591,7 +564,7 @@ E_{a\sim\pi_t}
 \left[
 -\alpha
 \left(
-\log\pi_t(a|s_t)+H_0
+\log\pi_t(a|\pi_t)+H_0
 \right)
 \right]
 $$
@@ -621,7 +594,6 @@ $$
 > H0不是人为设置的吗？为什么可以作为目标？
 
 理解：
-
 H0不是环境真实答案。
 
 它类似：
@@ -641,11 +613,11 @@ H0不是环境真实答案。
 alpha_loss = -(
     self.log_alpha *
     (log_pi.detach()
-    + self.target_entropy)
+    +self.target_entropy)
 ).mean()
 ```
 
-为了优化稳定乘log(alpha)
+---
 
 为什么有：
 
@@ -686,20 +658,8 @@ $$
 $$
 
 SAC通过最大熵强化学习将探索程度作为约束条件，引入拉格朗日乘子 α 控制熵的重要程度。
-
-由于深度学习框架默认进行梯度下降，因此将最大化问题转化为最小化损失，并利用：
-
-$$
-H(\pi)=-E[\log\pi]
-$$
-
-将熵约束转换为：
-
-$$
--\alpha(\log\pi+H_0)
-$$
-
-最终得到代码中的 alpha_loss。
+由于深度学习框架默认进行梯度下降，因此将最大化问题转化为最小化损失，并利用 \(H(\pi)=-E[\log\pi]\)
+将熵约束转换为 \( -\alpha(\log\pi+H_0)\)，最终得到代码中的 alpha_loss。
 
 ---
 
@@ -722,7 +682,7 @@ $$
 
 ---
 
-## 10.1 为什么需要拉格朗日乘子？
+## 9.1 为什么需要拉格朗日乘子？
 
 在普通优化问题中，如果只有一个目标：
 
@@ -770,7 +730,7 @@ $$
 
 ---
 
-# 10.2 SAC中的拉格朗日思想
+# 9.2 SAC中的拉格朗日思想
 
 SAC希望达到两个目标：
 
@@ -805,8 +765,7 @@ $$
 构造：
 
 $$
-L
-=
+L=
 Q(s,a)+\alpha(H(\pi)-H_0)
 $$
 
@@ -824,13 +783,12 @@ $$
 
 ---
 
-# 10.3 Alpha为什么能够控制探索？
+# 9.3 Alpha为什么能够控制探索？
 
 观察：
 
 $$
-L
-=
+L=
 Q+\alpha H
 $$
 
@@ -896,7 +854,7 @@ $$
 
 ---
 
-# 10.4 为什么Alpha需要自动调整？
+# 9.4 为什么Alpha需要自动调整？
 
 如果固定Alpha：
 
@@ -934,7 +892,7 @@ $$
 
 ---
 
-# 10.5 Alpha Loss推导
+# 9.5 Alpha Loss推导
 
 代码：
 
@@ -988,7 +946,7 @@ Soft Update Target Critic
 
 ---
 
-# 12. 下面是网络的部分代码
+# 12.下面是网络的部分代码
 
 ```python
 class SAC_Critic(nn.Module):
@@ -1040,13 +998,11 @@ class SAC_Actor(nn.Module):
         if with_logprob:
             # 1.SAC论文通过u的对数概率计算a的对数概率公式:
             "logp_pi_a = (dist.log_prob(u) - th.log(1 - a.pow(2) + 1e-6)).sum(dim=1, keepdim=True)"
-            
             # 2.SAC原文公式有a=tanh(u), 导致梯度消失, 将tanh公式展开:
             logp_pi_a = dist.log_prob(u).sum(axis=1, keepdim=True) - (2 * (np.log(2) - u - F.softplus(-2 * u))).sum(axis=1, keepdim=True) # (batch, 1)
         else:
             logp_pi_a = None
         return a, logp_pi_a # (batch, act_dim) and (batch, 1)
-    
 
     def act(self, obs, deterministic=False) -> np.ndarray[any, float]: # NOTE 不支持混合动作空间
         self.eval()
