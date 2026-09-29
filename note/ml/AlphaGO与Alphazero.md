@@ -1,6 +1,10 @@
 Alphazero究竟是有什么更亮点的地方，当AlphaGO与Alphazero对弈时实现100:0的局面，
 在学Alphazero的时候，因为本身本人听课是听的AlphaGO但看的代码是后者，所以一直觉得就应该这样，下面让我们一起来看看
 
+所用代码来源：
+https://github.com/junxiaosong/AlphaZero_Gomoku#update-2018117-supports-training-with-pytorch
+
+
 首先就是AlphaGO和Alphazero的框架
 AlphaGO
 ```
