@@ -381,6 +381,7 @@ softmax
 得到动作概率
 Alphazero
 ```
+Alphazero:
 ```
 MCTS
  │
