@@ -1,11 +1,12 @@
 Alphazero究竟是有什么更亮点的地方，当AlphaGO与Alphazero对弈时实现100:0的局面，
 在学Alphazero的时候，因为本身本人听课是听的AlphaGO但看的代码是后者，所以一直觉得就应该这样，下面让我们一起来看看
+
 首先就是AlphaGO和Alphazero的框架
 AlphaGO
 ```
                          ┌────────────── AlphaGo ──────────────┐
                          │                                     │
-                    输入棋盘状态                              │
+                    输入棋盘状态                                │
                          │                                     │
                          ↓                                     │
               ┌──────────┴──────────┐                          │
@@ -13,7 +14,7 @@ AlphaGO
        Policy Network         Value Network                    │
               │                     │                          │
               ↓                     ↓                          │
-       预测下一步动作概率       评估当前局面价值                │
+       预测下一步动作概率       评估当前局面价值                  │
               │                     │                          │
               └──────────┬──────────┘                          │
                          ↓                                     │
@@ -21,30 +22,30 @@ AlphaGO
                          │                                     │
              ┌───────────┼────────────┐                        │
              ↓           ↓            ↓                        │
-          Selection   Expansion    Evaluation                   │
+          Selection   Expansion    Evaluation                  │
              │           │            │                        │
              │           ↓            │                        │
-             │       新增节点         │                        │
+             │       新增节点         │                         │
              │                        │                        │
              │                 ┌──────┴──────┐                 │
              │                 ↓             ↓                 │
-             │           Value Network   Rollout                │
+             │           Value Network   Rollout               │
              │                 │             │                 │
              │                 └──────┬──────┘                 │
              │                        ↓                        │
-             └────────────────── Backup                         │
-                                      │                         │
-                                      ↓                         │
+             └────────────────── Backup                        │
+                                      │                        │
+                                      ↓                        │
                               更新搜索树统计                    │
-                                      │                         │
-                                      ↓                         │
+                                      │                        │
+                                      ↓                        │
                               选择最终落子                      │
-                                      │                         │
-                                      ↓                         │
-                                  进行对局                       │
-                                      │                         │
-                                      ↓                         │
-                              获得最终胜负结果                  │
+                                      │                        │
+                                      ↓                        │
+                                  进行对局                      │
+                                      │                        │
+                                      ↓                        │
+                              获得最终胜负结果                   │
                                       │                         │
                     ┌─────────────────┴─────────────────┐       │
                     ↓                                   ↓       │
@@ -143,23 +144,17 @@ Alphazero
 人类行为模仿也叫行为克隆，也就是让神经网络去学习高手的招式和下棋风格，从而变得强大，局限性在于如果有一个从未见过的局面，那它就不智能了，可以说是克隆
 再者我觉得的缺点就是还有，因为棋手对弈难免会有些地方没考虑到，导致给网络的是个不是最优下法的学习，会有一些混淆。
 Alphazero去掉这个其实在预期之中，因为我们知道蒙特卡洛树搜索的过程，也就是对于一个状态的几乎要搜索上千次，对于对弈来说，上千次已经挺多的了，几乎模拟完
+
 所有的路径了然后挑选个最好的，如果我们本身不去模仿人的行为，而是发挥自己的算力特长，那效果会不会更好
 答案是会的，这就是alphazero所做的一个改进
-下来我们通过代码来看这两个的不同地方
-首先第一点：
 
+下来我们通过代码来看这两个的不同地方
+
+首先第一点：
 AlphaGO的训练数据是人类棋谱和self-play数据
 Alphazero直接是self-play数据
 其次：
-AlphaGO是两个独立网络
-
-
-
-
-
-
-
-
+AlphaGO是两个独立网络，策略网络和价值网络，因为策略网络和价值网络需要的特征很相似，所以如果把它们结合在一起会更好，更不用一个更新完更另一个，只需要更新同一套参数
 
 Alphazero是一个网络两个输出
 ```python
@@ -293,6 +288,8 @@ class PolicyValueNet():
         #for pytorch version >= 0.5 please use the following line instead.
         #return loss.item(), entropy.item()
 ```
+这个的漂亮之处在于，两种任务可以共享棋盘特征，并减少重复的特征提取
+
 再者：
 MCTS的评估方式：
 AlphaGO
@@ -311,9 +308,79 @@ MCTS
 ```
 是通过神经网络得到价值函数的值，然后再随机模拟下棋，这个自对弈的过程用一个轻量的rollout policy，根据当前局面快速选择动作
 ```python
-```
+def _playout(state):
 
+    # =========================
+    # 1. Selection
+    # =========================
+    node = root
+
+    while not node.is_leaf():
+
+        action = node.select()
+        state.do_move(action)
+
+    # =========================
+    # 2. Expansion
+    # =========================
+    action_probs = policy_network(state)
+
+    node.expand(action_probs)
+
+    # =========================
+    # 3. Evaluation
+    # =========================
+
+    # ① Value Network
+    value = value_network(state)
+
+    # ② Rollout
+    rollout_state = copy.deepcopy(state)
+
+    while not rollout_state.game_end():
+
+        # 注意：
+        # 这里不是再跑 MCTS
+        # 也不是再跑 Value Network
+        #
+        # 而是一个非常快的 rollout policy
+        probs = rollout_policy(rollout_state)
+
+        action = sample(probs)
+
+        rollout_state.do_move(action)
+
+    rollout_result = get_winner(rollout_state)
+
+    # =========================
+    # 4. 综合
+    # =========================
+    leaf_value = combine(
+        value,
+        rollout_result
+    )
+
+    # =========================
+    # 5. Backup
+    # =========================
+    node.update_recursive(leaf_value)
+
+```
+可以理解为以下过程，这也就是为什么与alphaGO Master与柯洁下完棋后，柯洁说在alphaGO的身上看见了许多先贤和对手，甚至看到了自己的影子。
+```
+当前棋盘
+   ↓
+观察候选位置附近的棋形
+   ↓
+提取一些局部特征
+   ↓
+计算每个动作的分数
+   ↓
+softmax
+   ↓
+得到动作概率
 Alphazero
+```
 ```
 MCTS
  │
@@ -457,6 +524,15 @@ class MCTSPlayer(object):
     def __str__(self):
         return "MCTS {}".format(self.player)
 ```
+AlphaZero 自对弈时，通常可以理解为两个 MCTSPlayer 轮流下棋；每个 MCTSPlayer 内部各自持有一个 MCTS 搜索树，而两个 MCTS 使用同一个 Policy-Value 神经网络。有点像自我对抗的意思了，我觉得主要在这里，因为如果对手和自己旗鼓相当，对于alphazero来说就是学习最好的时候，这些数据也最有用。
+
+如果AlphaGO去掉刚开始的行为克隆，那其实也无法战胜alphazero，主要在于alphazero的对手太强大了就是它自己，再加上alphazero的算力更充足更大，人类是无法战胜alphazero的，就像没有人能一直跑过汽车，算力和脑力相比，就如同发动机和全身肌肉相比。
+
+
+
+
+
+
 
 
 
