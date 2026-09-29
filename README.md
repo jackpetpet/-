@@ -21,7 +21,7 @@
 - [SAC（Soft Actor-Critic）学习笔记](note/ml/SAC.md)
 - [TD3 学习笔记](note/ml/TD3学习笔记.md)
 - [AlphaZero 学习笔记](note/ml/alphazero-note.md)
-
+- [AlphaGO与Alphazero学习对比](note/ml/AlphaGO与Alphazero.md)
 
 
 ---
