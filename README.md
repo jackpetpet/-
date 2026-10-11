@@ -16,6 +16,7 @@
 
 ### 1. 深度学习与机器学习 
 - [2026-02-05 逻辑斯特回归（Logistic Regression）原理与实现](note/ml/2026-02-05-logistic-regression.md)
+- [激活函数](note/ml/激活函数.md)  
   
 ### 2. 强化学习
 - [SAC（Soft Actor-Critic）学习笔记](note/ml/SAC.md)
