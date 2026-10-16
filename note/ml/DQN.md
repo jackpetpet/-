@@ -1,5 +1,6 @@
 DQN代码理解（cartpole-v0）
 1.首先导入库不必多说
+
 2.参数设置
 ```python
 BATCH_SIZE = 128
@@ -10,6 +11,7 @@ MEMORY_CAPACITY = 2000
 Q_NETWORK_ITERATION = 100
 ```
 epoisilo为随机选择比例，MEMORY_CAPACITY为经验池存放的状态多少，Q_NETWORK_ITERATION为target网络多久更新一次
+
 3.环境
 ```python
 env = gym.make("CartPole-v0")
@@ -18,7 +20,8 @@ NUM_ACTIONS = env.action_space.n
 NUM_STATES = env.observation_space.shape[0]
 ENV_A_SHAPE = 0 if isinstance(env.action_space.sample(), int) else env.action_space.sample.shape
 ```
-直接调用gym这个库函数，这里面有一些可训练的模型，NUM_ACTIONS统计动作，NUM_STATES统计表示状态的个数，
+直接调用gym这个库函数，这里面有一些可训练的模型，NUM_ACTIONS统计动作，NUM_STATES统计表示状态的个数
+
 4.网络
 ```python
 class Net(nn.Module):
@@ -42,6 +45,7 @@ class Net(nn.Module):
 
 ```
 网络大概是线性层-RELU-线性层-RELU-线性层，算是比较简单的网络了，用神经网络去拟合最后的值
+
 5.DQN
 ```python
 class DQN():
@@ -94,7 +98,8 @@ class DQN():
 __init__中分别定义了两个net,一个评估网络eval_net,另一个是目标网络target_net,此外还定义了优化器和损失，还有就是记忆池的初始化和
 choose_action用于选择动作，如果随机值小于EPISILO那么就用网络去得到动作，再去筛选预测下来的最大动作值，else则随机选择一个动作，然后返回动作
 store_transition用于往记忆池里存储经验，也就是经验回放的过程，先去拼接一条经验，然后计算目前存放的位置，最后直接存放
-learn为开始学习，target_net每100次更新一次，eval_net从经验池中拿出一个batch然后去更新和拟合，
+learn为开始学习，target_net每100次更新一次，eval_net从经验池中拿出一个batch然后去更新和拟合
+
 6.奖励函数
 ```python
 def reward_func(env, x, x_dot, theta, theta_dot):
@@ -104,6 +109,7 @@ def reward_func(env, x, x_dot, theta, theta_dot):
     return reward
 ```
 这个奖励函数的设置有两部分组成r1代表的是小车，r2代表杆，离中心点的距离约束和角度约束
+
 7.main函数
 ```python
 def main():
@@ -142,6 +148,7 @@ def main():
         
 ```
 写在最后，作为理解代码的基础，必须对pytorch的规则熟悉，通过这个代码整理一下相关知识
+
 1.张量创建于转换
 ```python
 torch.FloatTensor(state)                      # 从 numpy/list 创建 float32 tensor
@@ -156,6 +163,7 @@ action.reshape(ENV_A_SHAPE)                           # 改变形状
 q_next.max(1)[0].view(BATCH_SIZE, 1)                  # (128,) → (128, 1)
 ```
 .shape为查看形状，.dim()查看维度数，.unsqueeze(dim)插入一个维度，在dim位置插入一个维度,.squeeze(dim)删除维度，.view(shape)改变形状
+
 3.计算图与梯度控制
 ```python
 q_next = self.target_net(batch_next_state).detach()
@@ -170,10 +178,12 @@ torch.max(action_value, 1)[1]
 ```
 .max(dim)为沿某个维度取最大，返回（值，下标），.argmax(dim)只返回最大值的下标
 .gather(dim,index)为按索引取元素
+
 5.numpy里面的小知识
+```python
 np.hstack((...))为横向拼接
 array[idx_array, :]  	fancy indexing，按索引批量取行
-
+```
 
 
 
