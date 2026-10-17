@@ -19,6 +19,9 @@
 - [激活函数](note/ml/激活函数.md)  
   
 ### 2. 强化学习
+- [DQN学习笔记](note/ml/DQN.md)
+- [PolicyGradient学习笔记](note/ml/PolicyGradient.md)
+- [REINFORCE_with_Baseline学习笔记](note/ml/REINFORCE_with_Baseline.md)
 - [SAC（Soft Actor-Critic）学习笔记](note/ml/SAC.md)
 - [TD3 学习笔记](note/ml/TD3学习笔记.md)
 - [AlphaZero 学习笔记](note/ml/alphazero-note.md)
