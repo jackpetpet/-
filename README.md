@@ -30,6 +30,9 @@
 - [TD3 学习笔记](note/ml/TD3学习笔记.md)
 - [AlphaZero 学习笔记](note/ml/alphazero-note.md)
 - [AlphaGO与Alphazero学习对比](note/ml/AlphaGO与Alphazero.md)
+### 3. CS285
+- [Supervised Learning of Behaviors](note/RL/Supervised Learning of Behaviors.md)
+- [Flow Matching](note/RL/Flow Matching.md)
 
 
 ---
