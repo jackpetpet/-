@@ -28,12 +28,13 @@ Part 2:Defining the objective
 RL的目标：最大化长期期望奖励，不能只看眼前利益，为了躲避撞人和悬崖，必须优化长期期望奖励
 
 目标函数：
+
 $$
 \theta^{\star} = \arg \max_{\theta} \mathbb{E}_{\tau \sim p_{\theta}(\tau)} \left[ \sum_{t} r(\mathbf{s}_t, \mathbf{a}_t) \right]
 $$
+
 **公式拆解说明：**
-*   **\(\tau \sim p_{\theta}(\tau)\)**：\(\tau\) 代表一条完整的轨迹（即 \(s_1, a_1, s_2, a_2, ...\) 的序列）。\(p_{\theta}(\tau)\) 是
-    在当前策略 \(\theta\) 下，走出一条特定轨迹的概率。我们通过采样（Sampling）来获取这些轨迹。
+*   **\(\tau \sim p_{\theta}(\tau)\)**：\(\tau\) 代表一条完整的轨迹（即 \(s_1, a_1, s_2, a_2, ...\) 的序列）。\(p_{\theta}(\tau)\) 是在当前策略 \(\theta\) 下，走出一条特定轨迹的概率。我们通过采样（Sampling）来获取这些轨迹。
 *   **\(\mathbb{E}[\dots]\)**：期望值（Expectation）。因为环境可能有随机性，我们不能只看一次的结果，要算平均得分。
 *   **\(\sum_{t} r(\mathbf{s}_t, \mathbf{a}_t)\)**：把整条轨迹中，每一个时间步 \(t\) 拿到的奖励 \(r\) 累加起来，也就是**总回报**。
 
