@@ -33,7 +33,8 @@
 ### 3. CS285
 - [Supervised Learning of Behaviors](note/RL/Supervised_Learning_of_Behaviors.md)
 - [Flow Matching](note/RL/Flow_Matching.md)
-
+- [Reinforcement_Learning_Basics](note/RL/Reinforcement Learning Basics.md)
+- [Policy_Gradients](note/RL/Policy Gradients.md)
 
 ---
 
