@@ -17,7 +17,7 @@
 ### 1. 深度学习与机器学习 
 - [2026-02-05 逻辑斯特回归（Logistic Regression）原理与实现](note/ml/2026-02-05-logistic-regression.md)
 - [激活函数](note/ml/激活函数.md)  
-  
+- [Pytorch笔记](note/ml/Pytorch.md)
 ### 2. 强化学习
 - [DQN学习笔记](note/ml/DQN.md)
 - [PolicyGradient学习笔记](note/ml/PolicyGradient.md)
