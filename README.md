@@ -36,8 +36,8 @@
 - [Reinforcement_Learning_Basics](note/RL/Reinforcement_Learning_Basics.md)
 - [Policy_Gradients](note/RL/Policy_Gradients.md)
 - [HW2](note/RL/HW2.md)
-
-
+- [Actor_Critic](note/RL/Actor_Critic.md)
+- [Value_Based_RL](note/RL/Value_Based_RL.md)
 
 
 
