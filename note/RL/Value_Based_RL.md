@@ -1,4 +1,4 @@
-<img width="956" height="538" alt="image" src="https://github.com/user-attachments/assets/4657c135-5ad0-413e-bef1-48a3a6cfabe6" />## Part 1:Actor-critic without the actor
+## Part 1:Actor-critic without the actor
 
 <img width="959" height="539" alt="image" src="https://github.com/user-attachments/assets/3c34521d-2b10-43cd-8eab-5dab3de47781" />
 
