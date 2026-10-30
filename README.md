@@ -38,7 +38,7 @@
 - [HW2](note/RL/HW2.md)
 - [Actor_Critic](note/RL/Actor_Critic.md)
 - [Value_Based_RL](note/RL/Value_Based_RL.md)
-
+- [Q-Learning_in_Practice](note/RL/Q-Learning_in_Practice.md)
 
 
 
